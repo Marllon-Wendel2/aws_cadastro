@@ -1,4 +1,23 @@
-module.exports.handler = async (event) => {
+module.exports.simulandoUploadCsv = async (event) => {
+  try {
+    console.log('simule aqui o upload');
+
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: "Simulando upload do arquivo"
+      })
+    };
+  } catch (erro) {
+    return {
+      statusCode: err.statusCode || 500,
+      body: JSON.stringify(erro)
+    };
+  }
+}
+
+module.exports.cadastrarAlunos = async (event) => {
   return {
     statusCode: 200,
     body: JSON.stringify(
