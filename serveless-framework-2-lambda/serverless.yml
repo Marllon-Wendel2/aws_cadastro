@@ -1,0 +1,16 @@
+org: serverlessclass
+app: serveless-framework-2-lambda
+service: serveless-framework-2-lambda
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  api:
+    handler: index.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
