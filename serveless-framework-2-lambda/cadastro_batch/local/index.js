@@ -21,12 +21,19 @@ module.exports.simulandoUploadCsv = async (event) => {
 }
 
 module.exports.cadastrarAlunos = async (event) => {
-  const eventS3 = event.Records[0].s3;
-  const nomeBucket = eventS3.bucket.name;
-  const chaveBucket = decodeURIComponent(eventS3.object.key.replace(/\+g/, " "));
+  try {
+    const eventS3 = event.Records[0].s3;
+    const nomeBucket = eventS3.bucket.name;
+    const chaveBucket = decodeURIComponent(eventS3.object.key.replace(/\+g/, " "));
+  
+    const dadosArquivo = await obtemDadosDoCsvDoBucket(nomeBucket, chaveBucket);
+  
+    const alunos = await converteDadosCsv(dadosArquivo);
+    console.log(alunos)
+  } catch (error) {
+    console.log(error);
+  }
 
-  const dadosArquivo = await obtemDadosDoCsvDoBucket(nomeBucket, chaveBucket);
-
-  const alunos = converteDadosCsv(dadosArquivo);
+ 
 };
 
